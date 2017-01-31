@@ -100,7 +100,7 @@ app.get('/', (req, res) => {
     console.log(tweet);
     const template = document.getElementById('tweet-template').content;
     template.querySelector('.user-name').textContent = tweet.user.screen_name;
-    template.querySelector('.user-name').setAttribute('href', \`https://twitter.com/\${tweet.user.screen_name}\`);
+    template.querySelector('.user-name').parentNode.setAttribute('href', \`https://twitter.com/\${tweet.user.screen_name}\`);
     template.querySelector('.text').textContent = tweet.text;
     return document.importNode(template, true);
   }
