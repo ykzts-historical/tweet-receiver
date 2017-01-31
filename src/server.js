@@ -108,7 +108,7 @@ app.get('/', (req, res) => {
   function success(tweet) {
     const tweetList = document.getElementById('tweets');
     const tweetItem = createTweetItem(tweet);
-    tweetList.append(tweetItem);
+    tweetList.prepend(tweetItem);
   }
 
   function failure() {
