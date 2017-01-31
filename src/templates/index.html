@@ -1,0 +1,19 @@
+<!doctype html>
+<meta charset=UTF-8>
+<title>tweet receiver</title>
+<style>
+[aria-hidden]:not([aria-hidden=false]) {
+  display: none;
+}
+</style>
+<p aria-hidden>
+  <a href=/auth/twitter role=button>Login</a>
+</p>
+<ul id=tweets>
+</ul>
+<template id=tweet-template>
+  <li class=tweet>
+    <a href="">@<span class=user-name></span></a>
+    <span class=text></span>
+  </li>
+</template>
