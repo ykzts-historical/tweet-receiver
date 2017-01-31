@@ -7,15 +7,20 @@ import passport from 'passport';
 import { Strategy as TwitterStrategy } from 'passport-twitter';
 import path from 'path';
 import process from 'process';
+import SessionFileStore from 'session-file-store';
 import Twitter from 'twitter';
 import { Server as WebSocketServer } from 'ws';
 
 const app = express();
 const server = http.createServer(app);
+const FileStore = SessionFileStore(expressSession)
 const sessionParser = expressSession({
   resave: true,
   saveUninitialized: true,
   secret: 'test',
+  store: new FileStore({
+    path: path.join(__dirname, '..', 'tmp', 'sessions'),
+  }),
 });
 const twitterStrategy = new TwitterStrategy(
   {
