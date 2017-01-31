@@ -150,6 +150,12 @@ webSocketServer.on('connection', (socket) => {
         consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
       });
       client.stream('user', (stream) => {
+        stream.on('error', (error) => {
+          console.error(error);
+        });
+        socket.on('close', () => {
+          stream.destroy();
+        });
         stream.on('data', (data = {}) => {
           Object.assign(data, { type: 'tweet' });
           socket.send(JSON.stringify(data));
