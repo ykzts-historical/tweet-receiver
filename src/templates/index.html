@@ -5,15 +5,61 @@
 [aria-hidden]:not([aria-hidden=false]) {
   display: none;
 }
+
+#tweets {
+  margin: 0 auto;
+  max-width: 850px;
+}
 </style>
-<p aria-hidden>
-  <a href=/auth/twitter role=button>Login</a>
-</p>
-<ul id=tweets>
-</ul>
+<p aria-hidden><a href=/auth/twitter role=button>Login</a></p>
+<div id=tweets></div>
+<template id=tweet-item-template>
+  <style>
+    :host {
+      margin-top: 1rem;
+    }
+
+    .author {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .author ::slotted(.name) {
+      font-weight: bold;
+    }
+
+    .author .screen-name-with-at-mark {
+      color: #aaa;
+      font-size: .8rem;
+    }
+
+    .body ::slotted(p) {
+      margin: 0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .info {
+      font-size: .8rem;
+      text-align: right;
+    }
+  </style>
+  <div class=status>
+    <a class=author href="">
+      <slot name=name>
+        <span class=name>John Doe</span>
+      </slot>
+      <span class=scree-name-with-at-mark>@<slot name=screen-name><span class=screen-name>john-doe</span></slot></span>
+    </a>
+  </div>
+  <div class=body>
+    <slot name=tweet-body></slot>
+  </div>
+  <p class="info">(<slot name=timestamp><time class=timestamp datetime="">now</datetime></slot>)</p>
+</template>
 <template id=tweet-template>
-  <li class=tweet>
-    <a href="">@<span class=user-name></span></a>
-    <span class=text></span>
-  </li>
+  <span class=name slot=name></span>
+  <span class=scree-name slot=screen-name></span>
+  <time datetime="" slot=timestamp title=""></time>
+  <p slot=tweet-body></p>
 </template>

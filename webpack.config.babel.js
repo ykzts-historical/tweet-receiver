@@ -25,6 +25,9 @@ const commonConfig = {
                 },
               ],
             ],
+            plugins: [
+              'date-fns'
+            ]
           },
         },
       },
